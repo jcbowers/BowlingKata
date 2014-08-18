@@ -7,12 +7,12 @@ namespace BowlingKataTest
     [TestClass]
     public class BowlingKataUnitTest
     {
-        Game game = new Game();
+        Game game;
 
-        [TestCleanup]
+        [TestInitialize]
         public void Cleanup()
         {
-            game.Restart();
+            game = new Game();
         }
 
         #region Original Unit Tests

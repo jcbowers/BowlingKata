@@ -11,7 +11,11 @@ namespace BowlingKata
 
         public Game()
         {
-            Restart();
+            _frames.AddFirst(new FinalFrame());
+
+            for (int i = 0; i < 9; i++)
+                _frames.AddFirst(new Frame(_frames.First()));
+
             Frames = _frames.ToList();
         }
 
@@ -29,16 +33,6 @@ namespace BowlingKata
         public int Score()
         {
             return _frames.Sum(f=>f.Score);
-        }
-
-        public void  Restart()
-        {
-            _frames.Clear();
-
-            _frames.AddFirst(new FinalFrame());
-
-            for (int i = 0; i < 9; i++)
-                _frames.AddFirst(new Frame(_frames.First()));
         }
     }
 }
