@@ -105,6 +105,6 @@ namespace BowlingKataTest
                 game.RollMany(22, 10);
             }
         #endregion
-    }
+    } 
 
 }
