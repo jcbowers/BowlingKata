@@ -7,21 +7,12 @@ namespace BowlingKata
     {
         internal FinalFrame()
         {
-            _rolls = new List<UInt16>(3);
+            _rolls = new List<ushort>(3);
             Rolls = _rolls;
         }
 
-        public override bool IsComplete
-        {
-            get
-            {
-                return (IsStrikeOrSpare && _rolls.Count == 3) || (!IsStrikeOrSpare && _rolls.Count == 2);
-            }
-        }
+        public override bool IsComplete => (IsStrikeOrSpare && _rolls.Count == 3) || (!IsStrikeOrSpare && _rolls.Count == 2);
 
-        protected override int NextFrameBonus
-        {
-            get { return 0; }
-        }
+        protected override int NextFrameBonus => 0;
     }
 }

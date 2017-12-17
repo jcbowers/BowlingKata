@@ -6,15 +6,15 @@ namespace BowlingKata
 {
     public class Frame
     {
-        Frame _nextFrame;
+        private readonly Frame _nextFrame;
 
-        protected List<UInt16> _rolls;
+        protected List<ushort> _rolls;
 
         public IReadOnlyList<ushort> Rolls { get; protected set; }
 
         internal Frame()
         {
-            _rolls = new List<UInt16>(2);
+            _rolls = new List<ushort>(2);
             Rolls = _rolls;
         }
 
@@ -23,17 +23,14 @@ namespace BowlingKata
             _nextFrame = nextFrame;
         }
 
-        public virtual bool IsComplete 
-        { 
-            get { return _rolls.Count == 2; }
-        }
+        public virtual bool IsComplete => _rolls.Count == 2;
 
-        public UInt16 Score
+        public ushort Score
         {
-            get { return (UInt16)(_rolls.Sum(i => i) + NextFrameBonus); }
+            get { return (ushort)(_rolls.Sum(i => i) + NextFrameBonus); }
         }
 
-        internal void AddRoll(UInt16 pins)
+        internal void AddRoll(ushort pins)
         {
             if (TooManyPinsForFrame(pins))
                 throw new ArgumentException("Too many pins");
@@ -41,17 +38,14 @@ namespace BowlingKata
             _rolls.Add(pins);
         }
 
-        protected virtual int NextFrameBonus
-        {
-            get { return IsStrikeOrSpare ? _nextFrame.Rolls.FirstOrDefault() : 0; }
-        }
+        protected virtual int NextFrameBonus => IsStrikeOrSpare ? _nextFrame.Rolls.FirstOrDefault() : 0;
 
         protected bool IsStrikeOrSpare
         {
             get{ return Rolls.Take(2).Sum(i => i) >= 10; }
         }
 
-        protected virtual bool TooManyPinsForFrame(UInt16 pins)
+        protected virtual bool TooManyPinsForFrame(ushort pins)
         {
             return (!IsStrikeOrSpare && _rolls.FirstOrDefault() + pins > 10) || (IsStrikeOrSpare && _rolls[0] + pins > 20);
         }

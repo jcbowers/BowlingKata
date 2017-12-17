@@ -2,11 +2,11 @@
 
 namespace BowlingKata
 {
-    static class GameExtensions
+    internal static class GameExtensions
     {
-        public static Game RollMany(this Game game, int rolls, UInt16 pins)
+        public static Game RollMany(this Game game, int rolls, ushort pins)
         {
-            for (int i = 0; i < rolls; i++)
+            for (var i = 0; i < rolls; i++)
             {
                 game.Roll(pins);
             }
